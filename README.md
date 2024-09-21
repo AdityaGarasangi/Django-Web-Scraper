@@ -28,8 +28,8 @@
 ## Installation and Setup:
 
 1. Clone the repository:
-  - git clone https://github.com/AdityaGarasangi/link-collector.git
-  - cd link-collector
+  - git clone https://github.com/AdityaGarasangi/Django-Web-Scraper.git
+  - cd Django-Web-Scraper
 
 2. Install dependencies:
    - pip install -r requirements.txt
