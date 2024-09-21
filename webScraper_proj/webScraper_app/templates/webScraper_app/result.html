@@ -1,0 +1,73 @@
+{% extends "webScraper_app/baseTemplate.html" %} {% block title %}Link
+Collector{% endblock title %} {% block content %}
+
+<div class="container mt-5">
+  <div class="text-center">
+    <h1 class="display-4 mb-4">Link Collector</h1>
+    <p class="lead text-muted">
+      Enter a website URL to collect all the links available on the page.
+    </p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="POST" action="/">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            id="site"
+            name="site"
+            type="url"
+            placeholder="Enter Website URL"
+            required
+          />
+          <button class="btn btn-primary" type="submit">Scrape</button>
+        </div>
+      </form>
+
+      {% if error %}
+      <div class="alert alert-danger text-center" role="alert">{{ error }}</div>
+      {% endif %}
+
+      <div class="d-grid">
+        <a class="btn btn-warning" href="/delete">Clear Links</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-10 mx-auto">
+      <table class="table table-hover table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for link in data %}
+          <tr>
+            <td>{{ link.id }}</td>
+            <td>{{ link.name }}</td>
+            <td>
+              <a href="{{ link.address }}" target="_blank"
+                >{{ link.address }}</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if not data %}
+      <div class="alert alert-info text-center" role="alert">
+        No links available. Start scraping by entering a URL.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
